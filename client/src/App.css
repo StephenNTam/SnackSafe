@@ -1,0 +1,51 @@
+.App {
+  margin-top: 125px;
+  width: 100%;
+  height: 87vh;
+  text-align: center;
+  background-image: url('./images/HomePageBackground.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  overflow: hidden;
+}
+
+div > .search-bg {
+  width: 75%;
+  height: 75vh;
+  margin-left: 12.5%;
+  background-position: center;
+  background-color: rgb(148, 184, 184,0.5);
+  border-radius: 25px;
+}
+
+div > .contact-bg {
+  width: 100%;
+}
+
+.home-search-bar {
+  width: 50%;
+  display: flex;
+  margin-left: 25%;
+}
+
+.main-page-nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: white;
+  color: black;
+}
+
+.nav-links {
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
