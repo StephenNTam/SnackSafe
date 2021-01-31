@@ -50,6 +50,19 @@
   overflow: hidden;
 }
 
+.about-inner-picture {
+  align-content: center;
+  border-radius: 50px;
+  height: 50%;
+  width: 65%;
+  background-image: url('./images/AboutPageInner.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  overflow: hidden;
+}
+
 div > .search-bg {
   width: 75%;
   height: 75vh;

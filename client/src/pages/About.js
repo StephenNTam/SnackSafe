@@ -17,10 +17,7 @@ function About() {
               pertaining to many restaurants across Canada. Food brings us together and I believe 
               food is best when it can be enjoyed safely by everyone. 
             </p>
-            <div className="about-inner-picture">
-              <br/>
-              <img src={{img}} alt="" height="100%" width="100%" />
-            </div>
+            <div className="about-inner-picture"/>
         </div>
       </div>
     </div>
