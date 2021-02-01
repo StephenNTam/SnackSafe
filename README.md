@@ -1,17 +1,17 @@
 # SnackSafe
 
-##Details
+## Details
 Restaurant review website.
 
-##Requirements
+## Requirements
 npm
 node
 
-##Installation
+## Installation
 Download the repo to your device
 
-##Running (temp)
-###To run frontend:
+## Running (temp)
+### To run frontend:
   1. Navigate to the ./clent folder
   2. run the follwing commands:
       ```
