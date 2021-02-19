@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import logo from '../images/snacksafe.png'
+import fire from '../fire';
 
 function Nav() {
 
@@ -32,9 +33,8 @@ function Nav() {
         </Link>
 
         <Link style={ navStyle } to='/login' onClick={scrollToTop}>
-          <li>Login</li>
+          <li>Profile</li>
         </Link>
-
       </ul>
     </nav>
   );

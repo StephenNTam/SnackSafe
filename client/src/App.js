@@ -4,8 +4,10 @@ import Nav from './pages/Nav';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Login from './pages/LoginForm';
+import LoginForm from './pages/LoginForm';
 import Register from './pages/RegisterForm';
+import Profile from './pages/Profile';
+import ErrorPage from './pages/404Page';
 
 import {
   BrowserRouter as Router,
@@ -24,8 +26,10 @@ function App() {
           <Route path="/" exact component={Home}/>
           <Route path="/about" component={About}/>
           <Route path="/contact" component={Contact}/>
-          <Route path="/login" component={Login}/>
+          <Route path="/login" component={LoginForm}/>
           <Route path="/register" component={Register}/>
+
+          <Route path='*' exact={true} component={ErrorPage} />
         </Switch>
       </div>
     </Router>
