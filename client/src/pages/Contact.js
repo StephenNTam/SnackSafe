@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Form } from 'react-bootstrap';
+import fire from "../fire";
 
 //Contacts Page
 function Contact() {
   const [contactData, setContactData] = useState({ name:"", email:"", text:"" });
+
+  console.log(fire.auth().currentUser.email)
 
   return (
     <div className="contact">

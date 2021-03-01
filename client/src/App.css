@@ -236,11 +236,12 @@ div > .contact-bg {
 }
 
 .profile .btnContainer {
+  margin-top: 10%;
   width: 100%;
   padding: 24px 0;
 }
 
-.profile button {
+.profile .btnContainer button {
   border: none;
   outline: none;
   width: 50%;
