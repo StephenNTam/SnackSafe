@@ -5,8 +5,6 @@ import fire from "../fire";
 function Contact() {
   const [contactData, setContactData] = useState({ name:"", email:"", text:"" });
 
-  console.log(fire.auth().currentUser.email)
-
   return (
     <div className="contact">
       <div className="contact-bg">

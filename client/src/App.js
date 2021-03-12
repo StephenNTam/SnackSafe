@@ -6,8 +6,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import LoginForm from './pages/LoginForm';
 import Register from './pages/RegisterForm';
-import Profile from './pages/Profile';
 import ErrorPage from './pages/404Page';
+import Result from './pages/Result';
 
 import {
   BrowserRouter as Router,
@@ -28,6 +28,7 @@ function App() {
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={LoginForm}/>
           <Route path="/register" component={Register}/>
+          <Route path="/result" component={Result}/>
 
           <Route path='*' exact={true} component={ErrorPage} />
         </Switch>
