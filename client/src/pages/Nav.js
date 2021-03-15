@@ -28,10 +28,10 @@ function Nav() {
           <li>About</li>
         </Link>
 
-        <Link style={ navStyle } to='/contact' onClick={scrollToTop}>
-          <li>Contact</li>
+        <Link style={ navStyle } to='/contribute' onClick={scrollToTop}>
+          <li>Contribute</li>
         </Link>
-
+        
         <Link style={ navStyle } to='/login' onClick={scrollToTop}>
           <li>Profile</li>
         </Link>

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Autocomplete(prop){
-    console.log(prop.options)
-
     const history = useHistory();
     const [activeOptions, setActiveOptions] = useState(0);
     const [filteredOptions, setFilteredOptions] = useState([]);
@@ -14,7 +12,7 @@ function Autocomplete(prop){
       history.push({
         pathname: "/result",
         search: `?search=${userInput}`,
-        state: { options: {filteredOptions} }
+        state: { options: {filteredOptions}, data: { prop }, userInput: {userInput} },
       });
     }
 
@@ -22,7 +20,7 @@ function Autocomplete(prop){
       history.push({
         pathname: "/result",
         search: `?search=${e}`,
-        state: { options: {e} }
+        state: { options: {e}, data: { prop }, userInput: {userInput} }
       });
     }
 
@@ -54,7 +52,7 @@ function Autocomplete(prop){
         setActiveOptions(0);
         setFilteredOptions([]);
         setShowOptions(false);
-        setUserInput(e.currentTarget.innerText);
+        setUserInput("");
         handleClickOrEnter(e.currentTarget.innerText);
       };
 
@@ -62,8 +60,8 @@ function Autocomplete(prop){
         if (e.keyCode === 13) {
             setActiveOptions(0);
             setShowOptions(false);
-            setUserInput(filteredOptions[activeOptions])
-            handleClickOrEnter();
+            setUserInput("")
+            handleClickOrEnter(filteredOptions[activeOptions]);
           } else if (e.keyCode === 38) {
             if (activeOptions === 0) {
               return;
@@ -99,7 +97,7 @@ function Autocomplete(prop){
           } else {
             optionList = (
               <div className="no-options">
-                <em>No Option!</em>
+                <em style={{marginLeft:"45%"}}>Cannot find restaurant.</em>
               </div>
             );
           }
@@ -107,7 +105,6 @@ function Autocomplete(prop){
 
         return(
           <React.Fragment>
-            <h1 style={{marginTop:"1em",fontSize:"50px",color:"#00b4cc",WebkitTextStrokeColor:"white",WebkitTextStrokeWidth:"2px"}}>Find a Restaurant</h1>
             <div className="search">
               <input
                 type="text"

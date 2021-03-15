@@ -3,11 +3,13 @@ import './App.css';
 import Nav from './pages/Nav';
 import Home from './pages/Home';
 import About from './pages/About';
-import Contact from './pages/Contact';
+import Contribute from './pages/Contribute';
 import LoginForm from './pages/LoginForm';
 import Register from './pages/RegisterForm';
 import ErrorPage from './pages/404Page';
 import Result from './pages/Result';
+import RestaurantPage from './pages/RestaurantPage';
+import ReviewForm from './pages/ReviewForm';
 
 import {
   BrowserRouter as Router,
@@ -25,10 +27,12 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home}/>
           <Route path="/about" component={About}/>
-          <Route path="/contact" component={Contact}/>
+          <Route path="/contribute" component={Contribute}/>
           <Route path="/login" component={LoginForm}/>
           <Route path="/register" component={Register}/>
           <Route path="/result" component={Result}/>
+          <Route path="/restaurantpage" component={RestaurantPage}/>
+          <Route path="/reviewform" component={ReviewForm}/>
 
           <Route path='*' exact={true} component={ErrorPage} />
         </Switch>

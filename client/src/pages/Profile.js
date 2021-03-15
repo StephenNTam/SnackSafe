@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import fire from '../fire';
+import  Allergies from '../variables/allergies'
 import '../App.css';
 
 function Profile({handleLogout,userID}) {
@@ -10,11 +11,38 @@ function Profile({handleLogout,userID}) {
   const [isEditable, setEditable] = useState(false);
   const [profileUserName, setProfileUserName] = useState("");
   const [profileLocation, setProfileLocation] = useState("");
+  const [profileAllergies, setProfileAllergies] = useState([]);
+
+  const allergyMap = {
+    "peanuts" : false,
+    "egg" : false,
+    "crustacean and molluscs" : false,
+    "fish" : false,
+    "milk" : false,
+    "sesame" : false,
+    "soy" : false,
+    "tree nuts" : false,
+    "wheat" : false
+  }
 
   const db = fire.firestore();
 
   const refreshPage = ()=>{
     window.location.reload();
+  }
+
+  const onChange = (e) => {
+    console.log(e.target.value)
+    const uAllergies = profileAllergies;
+    var index;
+    if (e.target.checked) {
+      uAllergies.push(e.target.value)
+    } else {
+      index = uAllergies.indexOf(e.target.value)
+      uAllergies.splice(index, 1)
+    }
+    setProfileAllergies(uAllergies);
+    console.log(profileAllergies);
   }
 
   async function addUser(userID){
@@ -35,7 +63,7 @@ function Profile({handleLogout,userID}) {
     })
   }
 
-  async function updateUser(userID,profileUserName,profileLocation){
+  async function updateUser(userID,profileUserName,profileLocation,profileAllergies){
     if (profileUserName == undefined) {
       profileUserName = "";
     } 
@@ -47,13 +75,15 @@ function Profile({handleLogout,userID}) {
       .set(
         {
           userName: profileUserName,
-          userLocation: profileLocation
+          userLocation: profileLocation,
+          userAllergies: profileAllergies
         },
         {merge: true}
       )
       .catch( error => console.log(error));
       setProfileUserName(profileUserName);
       setProfileLocation(profileLocation);
+      setProfileAllergies(profileAllergies);
       refreshPage();
   }
 
@@ -61,6 +91,7 @@ function Profile({handleLogout,userID}) {
     addUser(userID)
     setProfileUserName(userData.userName);
     setProfileLocation(userData.userLocation);
+    setProfileAllergies(userData.userAllergies);
     setIsLoaded(true);
   }
 
@@ -83,6 +114,36 @@ function Profile({handleLogout,userID}) {
           <span>{userData.userLocation}</span>)}
         <br /><br />
         <span style={{fontWeight:'bold'}}>Your Allergies</span>
+        {isEditable ? (
+          <span key="allergies"><br/>{Allergies.map(allergies => 
+            <form>
+              <input type="checkbox" id={allergies} name={allergies} value={allergies} onChange={(e) => onChange(e)}/>
+              <label htmlFor={allergies}>
+                {allergies}
+              </label>
+            </form>
+            )}
+          </span>
+          ):(
+            <div>
+              {console.log(userData.userAllergies)}
+              {userData.userAllergies ? (
+                <span key="allergies">
+                  {userData.userAllergies.map(allergies => {
+                    return (
+                      <li key={allergies}>
+                        {allergies}
+                      </li>
+                    );
+                })}
+                </span>
+              ) : (
+                <span>
+                  Loading ...
+                </span>
+              )}
+            </div>
+        )}
         <br />
         <br />
         <br />
@@ -90,7 +151,7 @@ function Profile({handleLogout,userID}) {
             <button
               onClick={() => 
                 {
-                  updateUser(userID,profileUserName,profileLocation)
+                  updateUser(userID,profileUserName,profileLocation,profileAllergies)
                   setEditable(!isEditable)
                 }
               }
@@ -103,6 +164,7 @@ function Profile({handleLogout,userID}) {
                 {
                   setProfileUserName(userData.userName);
                   setProfileLocation(userData.userLocation);
+                  setProfileAllergies(userData.userAllergies);
                   setEditable(!isEditable);
                 }
               }>

@@ -5,9 +5,8 @@ import Autocomplete from './Autocomplete';
 
 //Main Screen Page
 function Home() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [restaurantData, setRestaurantData] = useState()
-  const [targetSearch, setTargetSearch] = useState("")
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [restaurantData, setRestaurantData] = useState();
 
   const db = fire.firestore();
 
@@ -21,12 +20,10 @@ function Home() {
     setIsLoaded(true)
   }
 
-  console.log(restaurantData);
-  console.log(targetSearch);
-
   return (
     <div className="home">
       <div className="home-bg">
+        <h1 style={{marginTop:"1em",fontSize:"50px",color:"#00b4cc",WebkitTextStrokeColor:"white",WebkitTextStrokeWidth:"2px"}}>Find a Restaurant</h1>
         <Autocomplete options = {restaurantData} />
       </div>
     </div>
