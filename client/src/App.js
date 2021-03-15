@@ -14,8 +14,7 @@ import ReviewForm from './pages/ReviewForm';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect }
+  Route }
 from 'react-router-dom';
 
 //Main App
