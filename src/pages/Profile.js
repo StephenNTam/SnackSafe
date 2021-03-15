@@ -117,7 +117,14 @@ function Profile({handleLogout,userID}) {
         {isEditable ? (
           <span key="allergies"><br/>{Allergies.map(allergies => 
             <form>
-              <input type="checkbox" id={allergies} name={allergies} value={allergies} onChange={(e) => onChange(e)}/>
+              {profileAllergies.includes(allergies) ? 
+              (
+                <input type="checkbox" id={allergies} name={allergies} value={allergies} checked onChange={(e) => onChange(e)}/>
+              )
+              :
+              (
+                <input type="checkbox" id={allergies} name={allergies} value={allergies} onChange={(e) => onChange(e)}/>
+              )}
               <label htmlFor={allergies}>
                 {allergies}
               </label>
