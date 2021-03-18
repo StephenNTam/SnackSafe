@@ -9,6 +9,7 @@ function Autocomplete(prop){
     const [userInput, setUserInput] = useState('');
 
     const handleSearch = () => {
+      setUserInput('');
       history.push({
         pathname: "/result",
         search: `?search=${userInput}`,
@@ -41,9 +42,8 @@ function Autocomplete(prop){
           (optionName) =>
             optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1  
         );
-
         setActiveOptions(0);
-        setFilteredOptions(filteredOptions);
+        setFilteredOptions(filteredOptions.slice(0,7));
         setShowOptions(true);
         setUserInput(e.currentTarget.value)
     }
@@ -69,7 +69,6 @@ function Autocomplete(prop){
             setActiveOptions(activeOptions - 1);
           } else if (e.keyCode === 40) {
             if (activeOptions === filteredOptions.length - 1) {
-              console.log(activeOptions);
               return;
             }
             setActiveOptions(activeOptions + 1);

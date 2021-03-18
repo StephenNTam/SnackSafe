@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import fire from "../fire";
 import { useHistory } from 'react-router-dom';
-import allergies from '../variables/allergies';
 
 function RestaurantPage() {
     const history = useHistory();
     const restaurantData = history.location.state.data;
     const restaurantID = restaurantData.restaurantName.concat(`+${restaurantData.restaurantAddress}`);
+
+    const currentUser = fire.auth().currentUser;
 
     const db = fire.firestore();
 
@@ -58,9 +59,11 @@ function RestaurantPage() {
                 <h5>Hours</h5>
                 <h6>{restaurantData.restaurantHours}</h6>
                 <br/>
+                <h5>Cuisine Type:</h5>
+                <h6>{restaurantData.restaurantType}</h6>
+                <br/>
                 <h5>Contact Info</h5>
                 <h6>Phone: {restaurantData.restaurantPhone}</h6>
-                <h6>Email: {restaurantData.restaurantEmail}</h6>
                 <h6>Website: <a href={restaurantData.restaurantWWW} target="_blank">{restaurantData.restaurantWWW}</a></h6>
                 <br/><br/>
                 {fire.auth().currentUser ? 
@@ -72,7 +75,7 @@ function RestaurantPage() {
                     :
                     (
                     <div>
-                        You must be <a className="add-link" onClick={() => handleLogin()}>logged in</a> to contribute.
+                        You must be <a className="add-link" onClick={() => handleLogin()}>logged in</a> to add a review..
                     </div>
                 )}
             </div>

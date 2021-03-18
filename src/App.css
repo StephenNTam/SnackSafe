@@ -369,6 +369,7 @@ ul.options {
   transition: width 0.3s;
   margin: auto;
   position: relative;
+  overflow:auto;
 }
 
 ul.options li {
@@ -419,6 +420,7 @@ ul.options li.option-active {
   margin-top: 125px;
   margin-left: 40%;
   width: 60%;
+  min-height: 87vh;
   height: 110%;
   background-color: #70bec4;
   position:absolute;

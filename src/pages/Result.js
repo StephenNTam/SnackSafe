@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import fire from '../fire';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Autocomplete from './Autocomplete';
-import { Container, InputGroup, Button, Form, ListGroup, ButtonGroup, ToggleButton, FormLabel, Modal } from "react-bootstrap";
 
 function Result() {
     const history = useHistory();

@@ -109,7 +109,7 @@ function ReviewForm() {
                         <option value="5">5 stars</option>
                     </select>
                 </div>  
-                <textarea id = "myTextArea" rows = "1" cols = "50"
+                <textarea id = "myTextArea" rows = "5" cols = "50" style={{resize:"none"}}
                         onChange={(evt) => {
                             var currentComment = evt.target.value;
                             setAccommodationComment(currentComment)
@@ -133,7 +133,7 @@ function ReviewForm() {
                         <option value="5">5 stars</option>
                     </select>
                 </div>  
-                <textarea id = "myTextArea" rows = "1" cols = "50"
+                <textarea id = "myTextArea" rows = "5" cols = "50" style={{resize:"none"}}
                         onChange={(evt) => {
                             var currentComment = evt.target.value;
                             setFoodComment(currentComment)

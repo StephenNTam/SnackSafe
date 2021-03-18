@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import fire from "../fire";
 import { useHistory } from 'react-router-dom';
+import Popup from 'react-popup';
 
 //Contacts Page
 function Contribute() {
@@ -10,11 +11,15 @@ function Contribute() {
   const [restaurantData, setRestaurantData] = useState();
 
   const [restaurantAddress, setRestaurantAddress] = useState("");
-  const [restaurantEmail, setRestaurantEmail] = useState("");
+  const [restaurantType, setRestaurantType] = useState("");
   const [restaurantHours, setRestaurantHours] = useState("");
   const [restaurantName, setRestaurantName] = useState("");
   const [restaurantPhone, setRestaurantPhone] = useState("");
   const [restaurantWWW, setRestaurantWWW] = useState("");
+
+  const [issue, setissue] = useState(0);
+  const [fields, setFields] = useState(0);
+  const [added, setAdded] = useState(0);
 
   const db = fire.firestore();
 
@@ -31,7 +36,6 @@ function Contribute() {
   const duplicateCheck = () => {
     restaurantData.map(temp => {
       if(temp.restaurantName == restaurantName && temp.restaurantAddress == restaurantAddress){
-          console.log(temp);
           return true;
       }
     })
@@ -51,7 +55,7 @@ function Contribute() {
   async function handleAdd() {
     db.collection("restaurants").add({
       restaurantAddress: restaurantAddress,
-      restaurantEmail: restaurantEmail,
+      reataurantType: restaurantType,
       restaurantHours: restaurantHours,
       restaurantName: restaurantName,
       restaurantPhone: restaurantPhone,
@@ -95,11 +99,18 @@ function Contribute() {
                         setRestaurantPhone(evt.target.value)
                 }}></input><br/>
                 
-                <label for="restEmail" style={{padding:5,fontWeight:"bolder"}}>*Restaurant Email:</label><br/>
-                <input name="restEmail" id="restEmail" required size="100"
-                    onChange={(evt) => {
-                        setRestaurantEmail(evt.target.value)
-                }}></input><br/>
+                <label for="restType" style={{padding:5,fontWeight:"bolder"}}>*Restaurant Type:</label><br/>
+                <select name="restType" id="restType" required
+                        onChange={(evt) => {
+                            var typeValue = evt.target.value;
+                            setRestaurantType(typeValue);
+                        }}>
+                        <option disabled selected value> </option>
+                        <option value="American">American</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Mediterranean">Mediterranean</option>
+                        <option value="Other">Other</option>
+                    </select><br/>
 
                 <label for="restWeb" style={{padding:5,fontWeight:"bolder"}}>*Restaurant Website:</label><br/>
                 <input name="restWeb" id="restWeb" required size="100"
@@ -110,13 +121,30 @@ function Contribute() {
                 <button onClick={(evt) => {
                   evt.preventDefault();
                   const form = document.getElementById("contribution-form");
-                      if (form.checkValidity() === false || duplicateCheck() === true) {
+                      if (form.checkValidity() === false) {
+                        setFields(1);
+                        setissue(1);
+                        return;
+                      }
+                      else if (duplicateCheck()){
+                        setissue(1);
                         return;
                       }
                       handleAdd();
                       resetForm();
+                      setAdded(1);
+                      setissue(0);
+                      setFields(0);
+                      return(<div>Restaurant Added!</div>);
                 }}>Add Restaurant</button>
               </form>
+              {issue ? (
+                <div>
+                  {fields ? (<div>Please fill out all fields.</div>):(<div>Restaurant Already Exists!</div>)}
+                </div>
+              )
+              :
+              (<div>{added ? (<div>Restaurant successfully added!</div>):(<></>)}</div>)}
             </div>
           )
           :
