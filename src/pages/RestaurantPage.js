@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 function RestaurantPage() {
     const history = useHistory();
     const restaurantData = history.location.state.data;
-    const restaurantID = restaurantData.restaurantName.concat(`+${restaurantData.restaurantAddress}`);
+    const restaurantID = restaurantData.restaurantName.concat(`~${restaurantData.restaurantAddress}`);
 
     const db = fire.firestore();
 
@@ -78,7 +78,6 @@ function RestaurantPage() {
                 )}
             </div>
                 <div className="review-area">
-                    {console.log(reviewData)}
                     {reviewData ? 
                     (   
                         <div>

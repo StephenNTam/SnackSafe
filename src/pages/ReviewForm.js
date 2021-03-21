@@ -19,6 +19,7 @@ function ReviewForm() {
   const [foodRating, setFoodRating] = useState(0);
   const [safeAllergy, setSafeAllergy] = useState([]);
   const [carefulAllergy, setCarefulAllergy] = useState([]);
+  const [formError, setFormError] = useState(0);
 
   if(!isLoaded){
       setrestaurantID(history.location.state.data.restaurantID);
@@ -36,7 +37,6 @@ function ReviewForm() {
       uAllergies.splice(index, 1)
     }
     setSafeAllergy(uAllergies);
-    console.log(safeAllergy)
   }
 
   const onChangeCareful = (e) => {
@@ -49,7 +49,6 @@ function ReviewForm() {
       uAllergies.splice(index, 1)
     }
     setCarefulAllergy(uAllergies);
-    console.log(carefulAllergy)
   }
 
   async function handleAddReview() {
@@ -170,7 +169,7 @@ function ReviewForm() {
 
             <div>
             <label for="date">Date Visited:</label><> </>
-            <input defaultValue="MM/DD/YY" name="date" id="date"
+            <input defaultValue="" name="date" id="date"
                 onChange={(evt) => {
                     var currentDate = evt.target.value;
                     setDate(currentDate)
@@ -182,13 +181,26 @@ function ReviewForm() {
                 evt.preventDefault();
                 const form = document.getElementById("review-form");
                     if (form.checkValidity() === false || foodRating == "" || accommodationRating == "") {
-                        console.log("please fill out required fields")
-                    return;
+                        setFormError(1)
+                        return;
                     }
+                    setFormError(2)
                     handleAddReview();
                     history.goBack();
             }}>Add Review</button></div>
             </form>
+            <div>
+                {formError ? 
+                (
+                <div>
+                    Please fill out all required fields.
+                </div>
+                )
+                :
+                (
+                <></>
+                )}
+            </div>
         </div>
         )
         :

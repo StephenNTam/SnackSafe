@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import fire from "../fire";
 import { useHistory } from 'react-router-dom';
-import Popup from 'react-popup';
 
 //Contacts Page
 function Contribute() {
@@ -35,7 +34,7 @@ function Contribute() {
 
   const duplicateCheck = () => {
     restaurantData.map(temp => {
-      if(temp.restaurantName == restaurantName && temp.restaurantAddress == restaurantAddress){
+      if(temp.restaurantName === restaurantName && temp.restaurantAddress === restaurantAddress){
           return true;
       }
     })
@@ -150,7 +149,7 @@ function Contribute() {
           :
           (
             <div>
-              You must be <a className="add-link" onClick={() => handleLogin()}>logged in</a> to contribute.
+              You must be <a className="add-link" href onClick={() => handleLogin()}>logged in</a> to contribute.
             </div>
           )}
         </div>

@@ -1,8 +1,6 @@
 import React from 'react';
 import '../App.css';
 
-const img = require("../images/AboutPageInner.jpg");
-
 function About() {
   return (
     <div className="about">

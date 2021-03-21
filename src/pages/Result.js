@@ -18,7 +18,6 @@ function Result() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const handleLinkClick = (rest) => {
-        console.log(rest)
         var splitstr = rest.split("~");
         var name = splitstr[0];
         var address = splitstr[1];
@@ -30,8 +29,6 @@ function Result() {
                     search: `?restaurant=${name}`,
                     state: { data: temp },
                 });
-            }else{
-                console.log("restaurant not found")
             }
         })
     }
@@ -52,18 +49,11 @@ function Result() {
         reviews.map(review => {
             if(review.safeAllergy.includes(search.e)){
                 if(!temp.includes(review.restaurantID)){
-                    temp.push(review.restaurantID.replace("+","~"))
+                    temp.push(review.restaurantID)
                 }
             }
         });
-        console.log(temp)
         return temp;
-    }
-
-    if(search.filteredOptions){
-        console.log(search.filteredOptions)
-    } else {
-        console.log(search.e)
     }
 
     if(!isLoaded){
@@ -73,7 +63,7 @@ function Result() {
 
     return (
         <div className="result-page">
-            <Autocomplete options = {restaurantData} type={type} />
+            <Autocomplete options = {restaurantData} type={type} rd={rd} />
             <div className="result-list">
                 {Array.isArray(search.filteredOptions) ? 
                     (
@@ -81,7 +71,6 @@ function Result() {
                         <h3 style={{marginLeft:"2em"}}>Recommended Restaurants: </h3>
                         <ul className="result-list-container">
                         {search.filteredOptions.map(restaurants => {
-                            console.log(restaurants)
                             return(
                                 <li className="result-list-items" onClick={() => handleLinkClick(restaurants)}>
                                     {restaurants}
@@ -111,7 +100,6 @@ function Result() {
                                         {getRestByAll().map(restaurants => {
                                             return(
                                             <li className="result-list-items" onClick={() => handleLinkClick(restaurants)}>
-                                                {console.log(restaurants)}
                                                 {restaurants}
                                             </li>
                                             );

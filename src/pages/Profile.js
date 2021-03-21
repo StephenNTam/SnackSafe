@@ -27,7 +27,6 @@ function Profile({handleLogout,userID}) {
       index = uAllergies.indexOf(e.target.value)
       uAllergies.splice(index, 1)
     }
-    console.log(uAllergies)
     setProfileAllergies(uAllergies);
   }
 

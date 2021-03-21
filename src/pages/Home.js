@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import fire from '../fire';
 import '../App.css';
 import Allergies from '../variables/allergies';
@@ -35,7 +35,7 @@ function Home() {
                 <option value="restaurant">Restaurants</option>
                 <option value="allergy">Allergies</option>
         </select>
-        {searchType == "restaurant" ?
+        {searchType === "restaurant" ?
         (
           <Autocomplete options = {restaurantData} type="rest" rd={restaurantData} />
         )
