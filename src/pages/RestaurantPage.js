@@ -7,8 +7,6 @@ function RestaurantPage() {
     const restaurantData = history.location.state.data;
     const restaurantID = restaurantData.restaurantName.concat(`+${restaurantData.restaurantAddress}`);
 
-    const currentUser = fire.auth().currentUser;
-
     const db = fire.firestore();
 
     const [reviewData, setReviewData] = useState([]);

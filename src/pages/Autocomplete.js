@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Autocomplete(prop){
+  console.log(prop)
     const history = useHistory();
     const [activeOptions, setActiveOptions] = useState(0);
     const [filteredOptions, setFilteredOptions] = useState([]);
@@ -34,7 +35,12 @@ function Autocomplete(prop){
     }
 
     const onChange = (e) => {
-        const options = grabNames(prop);
+      var options = [];
+      if(prop.type == "rest"){
+        options = grabNames(prop);
+      } else {
+        options = prop.options;
+      }
         
         setUserInput(e.currentTarget.value);
 
@@ -112,7 +118,14 @@ function Autocomplete(prop){
                 onKeyDown={onKeyDown}
                 value={userInput}
               />
-              <button type="" value="" className="search-btn" onClick={() => {handleSearch()}}></button>
+              {prop.type == "rest" ? 
+              (
+                <button type="" value="" className="search-btn" onClick={() => {handleSearch()}}></button>
+              )
+              :
+              (
+                <div></div>
+              )}
             </div>
             {optionList}
           </React.Fragment>
