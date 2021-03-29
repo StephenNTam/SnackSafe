@@ -9,9 +9,11 @@ function ReviewForm() {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const db = fire.firestore();
+
   const [restaurantID, setrestaurantID] = useState("");
   const [restaurantName, setRestaurantName] = useState("");
-  const [username, setUserName] = useState("Anonymous");
+  const [username, setUserName] = useState("");
   const [date, setDate] = useState("");
   const [accommodationComment, setAccommodationComment] = useState("");
   const [accommodationRating, setAccommodationRating] = useState(0);
@@ -24,6 +26,7 @@ function ReviewForm() {
   if(!isLoaded){
       setrestaurantID(history.location.state.data.restaurantID);
       setRestaurantName(history.location.state.data.restaurantName);
+      setUsername(fire.auth().currentUser.email);
       setIsLoaded(true);
   }
 
@@ -37,6 +40,11 @@ function ReviewForm() {
       uAllergies.splice(index, 1)
     }
     setSafeAllergy(uAllergies);
+  }
+
+  const dateCheck = (date) =>{
+    const regex = new RegExp('^(\d{1,2})\/(\d{1,2})\/((\d{4})|(\d{2}))$');
+    return regex.test(date);
   }
 
   const onChangeCareful = (e) => {
@@ -66,7 +74,12 @@ function ReviewForm() {
     })
   }
 
-  const db = fire.firestore();
+  async function setUsername(user){
+    const UD = db.collection("users").doc(user);
+    await UD.get().then(doc => {
+        setUserName(doc.data().userName)
+    });
+  }
 
   const handleLogin = () => {
     history.push({
@@ -83,18 +96,18 @@ function ReviewForm() {
             <p>* required fields</p>
             <br/>
             <form id="review-form">
-
             <label for="username">Username:</label><> </>
-            <input defaultValue="Anonymous" name="username" id="username"
+            <input defaultValue={username} name="username" id="username"
                 onChange={(evt) => {
                     var currentUserName = evt.target.value;
                     setUserName(currentUserName)
                 }} required />
             <br/>
+            <br/>
 
             <div style={{float:"left",paddingRight:"3em"}}>
                 <div>
-                    <label for="rating" style={{padding:5}}>*Accomodation Rating:</label>
+                    <label for="rating" style={{padding:5}}>*How well did the restaurant<br/>accommodate for your allergies?</label>
                     <select name="rating" id="rating" required
                         onChange={(evt) => {
                             var currentRating = parseInt(evt.target.value);
@@ -118,7 +131,7 @@ function ReviewForm() {
 
             <div>
                 <div>
-                    <label for="rating" style={{padding:5}}>*Food Rating:</label>
+                    <label for="rating" style={{padding:5}}>*How was your <br/>overall dining experience? </label>
                     <select name="rating" id="rating" required
                         onChange={(evt) => {
                             var currentRating = parseInt(evt.target.value);
@@ -141,7 +154,7 @@ function ReviewForm() {
             </div>
             <br/>
             <div style={{float:"left",paddingRight:"15em"}}>
-                *Safe For:
+                *Accommodates For:
                 <span key="allergies"><br/>{Allergies.map(allergies => 
                     <form>
                         <input required type="checkbox" id={`safe${allergies}`} name={`safe${allergies}`} value={allergies} onChange={(e) => onChangeSafe(e)}/>
@@ -154,7 +167,7 @@ function ReviewForm() {
             </div>
 
             <div>
-                Look Out For:
+                Be Aware Of:
                 <span key="allergies"><br/>{Allergies.map(allergies => 
                     <form>
                         <input type="checkbox" id={`care${allergies}`} name={`care${allergies}`} value={allergies} onChange={(e) => onChangeCareful(e)}/>
@@ -168,8 +181,8 @@ function ReviewForm() {
             <br/>
 
             <div>
-            <label for="date">Date Visited:</label><> </>
-            <input defaultValue="" name="date" id="date"
+            <label for="date">*Date Visited (DD/MM/YY):</label><> </>
+            <input defaultValue="" name="date" id="date" required
                 onChange={(evt) => {
                     var currentDate = evt.target.value;
                     setDate(currentDate)
@@ -177,23 +190,32 @@ function ReviewForm() {
             </div>
             <br/>
                 
-            <div><button onClick={(evt) => {
+            <div>
+                <button onClick={(evt) => {
                 evt.preventDefault();
                 const form = document.getElementById("review-form");
-                    if (form.checkValidity() === false || foodRating == "" || accommodationRating == "") {
+                    if (form.checkValidity() === false || dateCheck(date) === false || foodRating == "" || accommodationRating == "") {
                         setFormError(1)
                         return;
                     }
                     setFormError(2)
                     handleAddReview();
                     history.goBack();
-            }}>Add Review</button></div>
+                }}>Add Review</button>
+
+                <button style={{marginLeft:"1em"}} onClick={() => {
+                    history.goBack();
+                }}>
+                    Cancel
+                </button>
+            
+            </div>
             </form>
             <div>
                 {formError ? 
                 (
                 <div>
-                    Please fill out all required fields.
+                    Please fill out all required fields properly.
                 </div>
                 )
                 :

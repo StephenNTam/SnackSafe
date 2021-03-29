@@ -409,7 +409,7 @@ ul.options li.option-active {
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .add-link:hover {
@@ -421,12 +421,11 @@ ul.options li.option-active {
   margin-left: 40%;
   width: 60%;
   min-height: 87vh;
-  height: 110%;
+  height: 10%;
   background-color: #70bec4;
-  position:absolute;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 110%;
   background-color: rgb(144, 201, 211);
   position:static;
 }

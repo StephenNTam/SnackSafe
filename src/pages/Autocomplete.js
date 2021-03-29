@@ -9,20 +9,24 @@ function Autocomplete(prop){
     const [userInput, setUserInput] = useState('');
 
     const handleSearch = () => {
-      setUserInput('');
-      history.push({
-        pathname: "/result",
-        search: `?search=${userInput}`,
-        state: { options: {filteredOptions}, data: { prop }, userInput: {userInput} },
-      });
+      if(filteredOptions != [] && activeOptions != 0){
+        setUserInput('');
+        history.push({
+          pathname: "/result",
+          search: `?search=${userInput}`,
+          state: { options: {filteredOptions}, data: { prop }, userInput: {userInput} },
+        });
+      }
     }
 
     const handleClickOrEnter = (e) => {
-      history.push({
-        pathname: "/result",
-        search: `?search=${e}`,
-        state: { options: {e}, data: { prop }, userInput: {userInput} }
-      });
+      if(filteredOptions != [] && activeOptions != 0){
+        history.push({
+          pathname: "/result",
+          search: `?search=${e}`,
+          state: { options: {e}, data: { prop }, userInput: {userInput} }
+        });
+      }
     }
 
     const grabNames = (list) => {
@@ -99,11 +103,19 @@ function Autocomplete(prop){
               </ul>
             );
           } else {
-            optionList = (
-              <div className="no-options">
-                <em style={{marginLeft:"45%"}}>Cannot find restaurant.</em>
-              </div>
-            );
+            if(prop.type === "rest"){
+              optionList = (
+                <div className="no-options">
+                  <em style={{marginLeft:"25%"}}>Cannot find restaurant.</em>
+                </div>
+              );
+            } else {
+              optionList = (
+                <div className="no-options">
+                  <em style={{marginLeft:"25%"}}>Cannot find Allergy.</em>
+                </div>
+              );
+            }
           }
         }
 

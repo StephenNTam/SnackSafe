@@ -63,7 +63,7 @@ function RestaurantPage() {
                 <h5>Contact Info</h5>
                 <h6>Phone: {restaurantData.restaurantPhone}</h6>
                 <h6>Website: <a href={restaurantData.restaurantWWW} target="_blank">{restaurantData.restaurantWWW}</a></h6>
-                <br/><br/>
+                <br/>
                 {fire.auth().currentUser ? 
                 (
                     <button onClick={() => handleAddReview()}>
@@ -86,6 +86,7 @@ function RestaurantPage() {
                             </h1>
                             {reviewData.length != 0 ? 
                             (
+                            <div>
                                 <ul className="review-container">
                                     {reviewData.map(review => 
                                         <li key={review}>
@@ -98,17 +99,19 @@ function RestaurantPage() {
                                             <div>Accommodation Rating: {review.accommodationRating}/5</div>
                                             <div>Accommodation Comment: {review.accommodationComment}</div>
                                             <br/>
-                                            <div>Safe For: {review.safeAllergy.map(allergy => 
+                                            <div>Accommodates For: {review.safeAllergy.map(allergy => 
                                                 <li>- {allergy}</li>)}
                                             </div>
                                             <br/>
-                                            <div>Does Serve: {review.carefulAllergy.map(allergy => 
+                                            <div>Be Aware Of: {review.carefulAllergy.map(allergy => 
                                                 <li>- {allergy}</li>)}
                                             </div>
                                             <div></div>
                                         </li>
                                     )}
                                 </ul>
+                                <br/>
+                            </div>
                             )
                             :
                             (
