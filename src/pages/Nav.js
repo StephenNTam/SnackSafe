@@ -1,8 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import logo from '../images/snacksafe.png'
-import fire from '../fire';
+import logo from '../images/snacksafe.png';
 
 function Nav() {
 

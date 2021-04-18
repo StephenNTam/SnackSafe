@@ -20,12 +20,13 @@ function Autocomplete(prop){
     }
 
     const handleClickOrEnter = (e) => {
-      history.push({
-        pathname: "/result",
-        search: `?search=${e}`,
-        state: { options: {e}, data: { prop }, userInput: {userInput} }
-      });
-      
+      if(filteredOptions != []){
+        history.push({
+          pathname: "/result",
+          search: `?search=${e}`,
+          state: { options: {e}, data: { prop }, userInput: {userInput} }
+        });
+      }
     }
 
     const grabNames = (list) => {
