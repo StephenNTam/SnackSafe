@@ -163,15 +163,17 @@ div > .contact-bg {
 
 .about-page {
   position: relative;
-  width: 75%;
-  height: 75vh;
-  margin-left: 12.5%;
+  margin-top: 5em;
+  width: 50%;
+  height: 50vh;
+  margin-left: 25%;
   background-position: center;
   background-color: rgb(255, 255, 255);
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 .about-content {
+  padding-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
   text-align: left;

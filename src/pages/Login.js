@@ -18,7 +18,7 @@ function Login(props) {
     return(
         <section className="login">
             <div className='loginContainer'>
-                <label>Username</label>
+                <label>Username (email)</label>
                 <input 
                     type='text' 
                     autoFocus 
@@ -37,17 +37,17 @@ function Login(props) {
                 <div className='btnContainer'>
                     {hasAccount ? (
                             <>
-                            <button onClick={handleLogin}>Login</button>
-                            <p>
-                                Don't have an account? 
-                                <span onClick={() => setHasAccount(!hasAccount)}>Register</span></p>
-                            </>
-                        ) : (
-                            <>
                             <button onClick={handleRegister}>Register</button>
                             <p>
                                 Have an account? 
                                 <span onClick={() => setHasAccount(!hasAccount)}>Login</span></p>
+                            </>
+                        ) : (
+                            <>
+                            <button onClick={handleLogin}>Login</button>
+                            <p>
+                                Don't have an account? 
+                                <span onClick={() => setHasAccount(!hasAccount)}>Register</span></p>
                             </>
                     )}
                 </div>

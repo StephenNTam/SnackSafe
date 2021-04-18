@@ -32,7 +32,7 @@ function Home() {
                     var typeValue = evt.target.value;
                     setSearchType(typeValue);
                 }}>
-                <option value="restaurant">Restaurants</option>
+                <option value="restaurant">Restaurants/Location</option>
                 <option value="allergy">Allergies</option>
         </select>
         {searchType === "restaurant" ?

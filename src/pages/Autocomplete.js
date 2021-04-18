@@ -9,7 +9,7 @@ function Autocomplete(prop){
     const [userInput, setUserInput] = useState('');
 
     const handleSearch = () => {
-      if(filteredOptions != [] && activeOptions != 0){
+      if(filteredOptions != []){
         setUserInput('');
         history.push({
           pathname: "/result",
@@ -20,13 +20,12 @@ function Autocomplete(prop){
     }
 
     const handleClickOrEnter = (e) => {
-      if(filteredOptions != [] && activeOptions != 0){
-        history.push({
-          pathname: "/result",
-          search: `?search=${e}`,
-          state: { options: {e}, data: { prop }, userInput: {userInput} }
-        });
-      }
+      history.push({
+        pathname: "/result",
+        search: `?search=${e}`,
+        state: { options: {e}, data: { prop }, userInput: {userInput} }
+      });
+      
     }
 
     const grabNames = (list) => {
