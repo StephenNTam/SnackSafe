@@ -169,7 +169,6 @@ function Profile({handleLogout,userID}) {
           )}
           <br />
           <br />
-          <br />
           {isEditable ? (
               <button
                 onClick={() => 

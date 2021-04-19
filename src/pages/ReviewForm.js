@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import fire from "../fire";
 import { useHistory } from 'react-router-dom';
 import Allergies from '../variables/allergies';
@@ -43,7 +43,7 @@ function ReviewForm() {
   }
 
   const dateCheck = (date) =>{
-    const regex = new RegExp('^(\d{1,2})\/(\d{1,2})\/((\d{4})|(\d{2}))$');
+    const regex = new RegExp("^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2})","gm");
     return regex.test(date);
   }
 
@@ -194,11 +194,13 @@ function ReviewForm() {
                 <button onClick={(evt) => {
                 evt.preventDefault();
                 const form = document.getElementById("review-form");
-                    if (form.checkValidity() === false || dateCheck(date) === false || foodRating == "" || accommodationRating == "") {
+                    if (form.checkValidity() === false || dateCheck(date) == false || foodRating == 0 || accommodationRating == 0) {
                         setFormError(1)
+                        console.log(form.checkValidity())
+                        console.log(foodRating)
+                        console.log(accommodationRating)
                         return;
                     }
-                    setFormError(2)
                     handleAddReview();
                     history.goBack();
                 }}>Add Review</button>

@@ -46,6 +46,8 @@ function RestaurantPage() {
         getReviews();
         setIsLoaded(true);
     }
+    
+    console.log(restaurantData)
 
     return(
         <div>
@@ -94,7 +96,7 @@ function RestaurantPage() {
                                             <div>{review.date}</div>
                                             <br />
                                             <div>Food Rating: {review.foodRating}/5</div>
-                                            <div>Accommodation Comment: {review.accommodationComment}</div>
+                                            <div>Food Comment: {review.foodComment}</div>
                                             <br/>
                                             <div>Accommodation Rating: {review.accommodationRating}/5</div>
                                             <div>Accommodation Comment: {review.accommodationComment}</div>

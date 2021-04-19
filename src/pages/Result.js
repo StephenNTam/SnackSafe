@@ -63,6 +63,7 @@ function Result() {
 
     return (
         <div className="result-page">
+            <span style={{marginLeft:"19%",fontWeight:"bold",position:"fixed",marginTop:"2%", fontSize:"30px"}}>Search again:</span>
             <Autocomplete options = {restaurantData} type={type} rd={rd} />
             <div className="result-list">
                 {Array.isArray(search.filteredOptions) ? 

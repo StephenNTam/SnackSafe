@@ -54,7 +54,7 @@ function Contribute() {
   async function handleAdd() {
     db.collection("restaurants").add({
       restaurantAddress: restaurantAddress,
-      reataurantType: restaurantType,
+      restaurantType: restaurantType,
       restaurantHours: restaurantHours,
       restaurantName: restaurantName,
       restaurantPhone: restaurantPhone,
