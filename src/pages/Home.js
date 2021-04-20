@@ -25,7 +25,8 @@ function Home() {
   return (
     <div className="home">
       <div className="home-bg">
-        <h1 style={{marginTop:"1em",fontSize:"50px",color:"#00b4cc",WebkitTextStrokeColor:"white",WebkitTextStrokeWidth:"2px"}}>Find a Restaurant</h1>
+        <h4 style={{background:"white",paddingBottom:"15px"}}>Helping you find allergy friendly restaurants rated by your peers.</h4>
+        <h1 style={{marginTop:"0.5em",fontSize:"50px",color:"#00b4cc",WebkitTextStrokeColor:"white",WebkitTextStrokeWidth:"2px"}}>Find a Restaurant</h1>
         <label for="serachType" style={{fontSize:"25px",padding:5,fontWeight:"bolder",color:"#00b4cc",WebkitTextStrokeColor:"white",WebkitTextStrokeWidth:"1px"}}>Search Type:</label><br/>
         <select name="searchType" id="searchType" required
                 onChange={(evt) => {

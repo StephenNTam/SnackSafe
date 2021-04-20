@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import fire from "../fire";
 import { useHistory } from 'react-router-dom';
+import Modal from 'react-modal';
 
 //Contacts Page
 function Contribute() {
@@ -15,6 +16,8 @@ function Contribute() {
   const [restaurantName, setRestaurantName] = useState("");
   const [restaurantPhone, setRestaurantPhone] = useState("");
   const [restaurantWWW, setRestaurantWWW] = useState("");
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [issue, setissue] = useState(0);
   const [fields, setFields] = useState(0);
@@ -33,22 +36,23 @@ function Contribute() {
   }
 
   const duplicateCheck = () => {
+    var de = false;
     restaurantData.map(temp => {
+      console.log("name")
+      console.log(temp.restaurantName === restaurantName)
+      console.log("add")
+      console.log(temp.restaurantAddress === restaurantAddress)
       if(temp.restaurantName === restaurantName && temp.restaurantAddress === restaurantAddress){
-          return true;
+          de = true
       }
     })
-    return false;
+    return de;
   }
 
   const handleLogin = () => {
     history.push({
-      pathname: "/login"
+      pathname: "/home"
     });
-  }
-
-  const resetForm = () => {
-    document.getElementById("contribution-form").reset();
   }
 
   async function handleAdd() {
@@ -70,6 +74,22 @@ function Contribute() {
         {fire.auth().currentUser ? 
           (
             <div className="contribution-container">
+              <Modal isOpen={modalOpen}>
+                <div>
+                  <h2>
+                    Restaurant Successfully Added!
+                  </h2>
+                </div>
+                <br/>
+                <div>
+                  <button onClick={() => {
+                    history.push({
+                      pathname: "/login"
+                    });
+                  }}>Home</button>
+                  <button style={{marginLeft:"1em"}} onClick={() => window.location.reload()}>Add Another</button>
+                </div>
+              </Modal>
               <h1>Contribute a restaurant.</h1>
               <p>* required fields</p>
               <br/>
@@ -126,14 +146,15 @@ function Contribute() {
                         return;
                       }
                       else if (duplicateCheck()){
+                        setFields(0);
                         setissue(1);
                         return;
                       }
                       handleAdd();
-                      resetForm();
                       setAdded(1);
                       setissue(0);
                       setFields(0);
+                      setModalOpen(true);
                       return(<div>Restaurant Added!</div>);
                 }}>Add Restaurant</button>
               </form>
