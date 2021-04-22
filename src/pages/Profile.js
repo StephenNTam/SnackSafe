@@ -59,12 +59,12 @@ function Profile({handleLogout,userID}) {
   async function deleteUser(uid){
     const user = fire.auth().currentUser
     user.delete();
-    db.collection("users")
+    await db.collection("users")
       .doc(uid)
       .delete();
-      history.push({
-        pathname: "/login"
-      });
+    history.push({
+      pathname: "/login"
+    });
   }
 
   async function updateUser(userID,profileUserName,profileLocation,profileAllergies){
