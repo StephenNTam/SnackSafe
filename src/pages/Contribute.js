@@ -84,7 +84,7 @@ function Contribute() {
                 <div>
                   <button onClick={() => {
                     history.push({
-                      pathname: "/login"
+                      pathname: "/"
                     });
                   }}>Home</button>
                   <button style={{marginLeft:"1em"}} onClick={() => window.location.reload()}>Add Another</button>
